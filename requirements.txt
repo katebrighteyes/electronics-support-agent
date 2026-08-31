@@ -1,0 +1,38 @@
+# 전자제품 고객지원 AI Agent - requirements.txt
+# 단계별로 필요한 패키지를 주석으로 구분해 두었습니다.
+# (7번 Docker화 단계 전까지는 pip install -r requirements.txt 로 한 번에 설치해도 됩니다)
+
+# ── 1~3단계: RAG 문서 / Chroma DB 빌드 ─────────────────────────
+llama-index-core
+llama-index-readers-file
+llama-index-vector-stores-chroma
+llama-index-embeddings-ollama
+llama-index-llms-ollama
+chromadb
+
+# ── 4단계: LangGraph 멀티 에이전트 ─────────────────────────────
+langgraph
+langchain-core
+langchain-ollama
+
+# Reranking (SentenceTransformerRerank, config.RERANK_MODEL)
+sentence-transformers
+
+# ── 5단계: RAGAS 평가 ───────────────────────────────────────────
+# ragas 0.4.x는 langchain-community가 ChatVertexAI를 langchain-google-vertexai로
+# 이전하면서 생긴 알려진 호환성 버그(ModuleNotFoundError)가 있어 0.4 미만으로 고정합니다.
+# (evaluate_ragas.py 실행 시 이 오류가 나면 pip install "ragas<0.4" 로 재설치하세요)
+ragas<0.4
+datasets
+openpyxl
+
+# Web Search Tool (TAVILY_API_KEY 설정 시 Tavily 사용, 없으면 DuckDuckGo로 자동 폴백)
+tavily-python
+duckduckgo-search
+
+# ── 6단계: FastAPI 백엔드 + Streamlit 프론트엔드 ────────────────
+fastapi
+uvicorn[standard]
+sse-starlette
+streamlit
+requests

@@ -1,0 +1,95 @@
+{
+  "description": "RAGAS 평가용 최종 질문/정답 세트 (세탁기3 + 건조기3 + TV3 + 미지원1 = 10개). expected_route는 4번 단계 멀티에이전트 테스트와 5번 단계 RAGAS 평가에서 라우팅 결과 검증용으로 사용.",
+  "items": [
+    {
+      "id": "washer_1",
+      "product": "washer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "세탁기가 탈수 중에 자꾸 멈춰요.",
+      "ground_truth": "세탁물이 한쪽으로 치우치면 탈수 중 균형을 맞추기 위해 세탁기가 멈추거나 다시 회전할 수 있습니다. 세탁물을 고르게 펴서 다시 탈수해 보세요. 같은 문제가 반복되면 배수 상태와 제품 매뉴얼의 오류 표시(UE 코드)도 함께 확인하는 것이 좋습니다.",
+      "reference_files": ["washer_troubleshooting.txt", "washer_error_code.txt"]
+    },
+    {
+      "id": "washer_2",
+      "product": "washer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "세탁기에 물이 들어오지 않아요.",
+      "ground_truth": "수도 밸브가 열려 있는지, 급수 호스가 꺾이거나 눌리지 않았는지 확인하세요. 급수 필터에 이물질이 쌓여 있어도 물 공급이 원활하지 않을 수 있습니다. 이 상태가 지속되면 디스플레이에 IE(급수 오류) 코드가 표시될 수 있습니다.",
+      "reference_files": ["washer_troubleshooting.txt", "washer_error_code.txt"]
+    },
+    {
+      "id": "washer_3",
+      "product": "washer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "세탁기가 너무 심하게 흔들려요.",
+      "ground_truth": "제품이 수평으로 설치되어 있는지 확인하고 세탁물이 한쪽으로 몰리지 않았는지 점검하세요. 설치 바닥이 불안정하거나 수평 조절 다리가 맞지 않는 경우에도 진동이 커질 수 있습니다.",
+      "reference_files": ["washer_troubleshooting.txt", "washer_installation.txt"]
+    },
+    {
+      "id": "dryer_1",
+      "product": "dryer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "건조기를 돌려도 옷이 축축해요.",
+      "ground_truth": "필터가 막혀 있거나 건조물의 양이 너무 많으면 건조 성능이 떨어질 수 있습니다. 필터를 청소하고 적정 용량(정격 용량의 70~80%)으로 다시 건조해 보세요. 그래도 반복되면 열교환기(응축기) 청소가 필요할 수 있습니다.",
+      "reference_files": ["dryer_troubleshooting.txt", "dryer_manual.txt"]
+    },
+    {
+      "id": "dryer_2",
+      "product": "dryer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "건조기에서 냄새가 나요.",
+      "ground_truth": "필터와 내부에 먼지나 습기가 남아 있을 수 있습니다. 필터와 제품에서 사용자가 청소 가능한 부분을 정리하고 내부를 충분히 환기해 주세요. 물통을 사용하는 경우 건조 직후 물통을 비우는 것도 냄새 예방에 도움이 됩니다.",
+      "reference_files": ["dryer_troubleshooting.txt", "dryer_cleaning.txt"]
+    },
+    {
+      "id": "dryer_3",
+      "product": "dryer",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "건조기가 작동하다가 중간에 멈춰요.",
+      "ground_truth": "문이 제대로 닫혔는지, 필터나 통풍 경로가 막히지 않았는지 확인하세요. 응축수 물통이 가득 찬 경우에도 PE 오류와 함께 건조가 일시 정지됩니다. 반복해서 중단된다면 화면에 표시되는 오류코드를 확인한 뒤 해당 모델 매뉴얼을 참고해야 합니다.",
+      "reference_files": ["dryer_troubleshooting.txt", "dryer_error_code.txt"]
+    },
+    {
+      "id": "tv_1",
+      "product": "tv",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "TV가 Wi-Fi에 연결되지 않아요.",
+      "ground_truth": "공유기와 TV를 재시작한 뒤 Wi-Fi 비밀번호와 네트워크 상태를 확인하세요. 다른 기기에서도 인터넷 연결이 되지 않는다면 공유기 또는 인터넷 회선 문제일 가능성이 있습니다.",
+      "reference_files": ["tv_troubleshooting.txt", "tv_error_code.txt"]
+    },
+    {
+      "id": "tv_2",
+      "product": "tv",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "HDMI로 연결했는데 화면이 안 나와요.",
+      "ground_truth": "TV의 입력 소스가 연결한 HDMI 포트로 선택되어 있는지 확인하세요. HDMI 케이블을 다시 연결하거나 다른 포트 또는 케이블로 테스트해 보는 것도 좋습니다.",
+      "reference_files": ["tv_troubleshooting.txt", "tv_error_code.txt"]
+    },
+    {
+      "id": "tv_3",
+      "product": "tv",
+      "category": "troubleshooting",
+      "expected_route": "product_rag",
+      "question": "TV 화면이 가끔 꺼지고 소리만 나와요.",
+      "ground_truth": "외부 입력 장치와 HDMI 연결 상태를 먼저 확인하세요. 동일 증상이 TV 자체 앱이나 메뉴에서도 발생한다면 제품 문제 가능성이 있으므로 전원을 완전히 껐다가 다시 켜고, 반복될 경우 서비스 점검이 필요할 수 있습니다.",
+      "reference_files": ["tv_troubleshooting.txt"]
+    },
+    {
+      "id": "unsupported_1",
+      "product": "air_conditioner",
+      "category": "unsupported",
+      "expected_route": "unsupported",
+      "question": "에어컨에서 CH05 오류가 나요.",
+      "ground_truth": "현재 이 고객지원 AI는 세탁기, 건조기, TV 3개 제품만 내부 고객지원 대상으로 지원합니다. 에어컨 관련 오류는 현재 지원 범위에 포함되지 않습니다.",
+      "reference_files": []
+    }
+  ]
+}

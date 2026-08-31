@@ -1,0 +1,42 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    image: electronics-agent-backend:latest
+    container_name: electronics-agent-backend
+    ports:
+      - "${BACKEND_PORT}:8000"   # 외부 포트를 컨테이너 내부 8000번 포트로 연결
+    volumes:
+      - .:/app       # 개발 편의를 위한 Bind Mount 설정
+    environment:
+      # 도커 컨테이너에 특정 MIG 조각만 들여보내도록 제한 (H200 서버의 .env에서 설정)
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES}
+      # 컨테이너(bridge network) 안에서는 localhost가 호스트를 가리키지 않으므로,
+      # host.docker.internal(아래 extra_hosts)로 호스트의 Ollama 서버에 접근합니다.
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    extra_hosts:
+      # Linux 호스트에서도 host.docker.internal 이 호스트를 가리키도록 설정
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    image: electronics-agent-frontend:latest
+    container_name: electronics-agent-frontend
+    ports:
+      - "${FRONTEND_PORT}:8501"  # 외부 포트를 컨테이너 내부 8501번 포트로 연결
+    volumes:
+      - .:/app       # 개발 편의를 위한 Bind Mount 설정
+    environment:
+      # 컨테이너 간 통신 시 DNS 이름처럼 서비스 이름(backend)을 활용
+      - API_URL=http://backend:8000
+    depends_on:
+      - backend

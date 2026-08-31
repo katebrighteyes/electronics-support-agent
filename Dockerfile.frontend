@@ -1,0 +1,18 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install torch==2.6.0 torchvision==0.21.0 --extra-index-url https://download.pytorch.org/whl/cu124
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+# 프론트엔드 코드(app.py)는 frontend/ 안에 있음
+WORKDIR /app/frontend
+
+# 프론트엔드는 8501 포트 사용
+# (참고 파일은 streamlit_app.py 였지만, 우리 프로젝트의 실제 진입점 파일명은 app.py 입니다)
+CMD ["streamlit", "run", "app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
