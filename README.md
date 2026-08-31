@@ -115,6 +115,7 @@ python evaluate_ragas.py
 
 - `ragas<0.4` 가 필요합니다(0.4.x는 `langchain_community.chat_models.vertexai` 관련 알려진 호환성
   버그가 있음). `requirements.txt`에 이미 `ragas<0.4`로 고정되어 있으니 별도 조치는 필요 없습니다.
+  설치 내용 더 필요.
 
 ---
 
