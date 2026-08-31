@@ -7,8 +7,12 @@ services:
     container_name: electronics-agent-backend
     ports:
       - "${BACKEND_PORT}:8000"   # 외부 포트를 컨테이너 내부 8000번 포트로 연결
-    volumes:
-      - .:/app       # 개발 편의를 위한 Bind Mount 설정
+    # 주의: 호스트 폴더를 .:/app 으로 Bind Mount 하지 않습니다. 이미지 빌드 시점에
+    # COPY . . 로 코드가 이미 이미지 안에 들어있어 배포 환경에서는 불필요하고,
+    # 컨테이너는 root로 실행되어 Bind Mount된 호스트 폴더에 chroma_db를 root
+    # 소유로 생성해버려서(=배포 스크립트의 rm -rf가 Permission denied로 실패)
+    # 다음 배포를 막는 문제가 있었습니다. chroma_db는 컨테이너 시작 시 항상 새로
+    # 만들도록 되어 있어 컨테이너 내부에만 있어도 됩니다.
     environment:
       # 도커 컨테이너에 특정 MIG 조각만 들여보내도록 제한 (H200 서버의 .env에서 설정)
       - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES}
@@ -33,8 +37,7 @@ services:
     container_name: electronics-agent-frontend
     ports:
       - "${FRONTEND_PORT}:8501"  # 외부 포트를 컨테이너 내부 8501번 포트로 연결
-    volumes:
-      - .:/app       # 개발 편의를 위한 Bind Mount 설정
+    # backend와 동일한 이유로 .:/app Bind Mount를 사용하지 않습니다.
     environment:
       # 컨테이너 간 통신 시 DNS 이름처럼 서비스 이름(backend)을 활용
       - API_URL=http://backend:8000
