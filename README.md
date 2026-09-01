@@ -160,6 +160,7 @@ streamlit run app.py --server.port 8510
   # 예: 백엔드를 8010으로 띄운 경우
   BACKEND_PORT=8010 python main.py                 # (backend/ 에서)
   API_URL=http://localhost:8010 streamlit run app.py --server.port 8510   # (frontend/ 에서)
+   API_URL=http://localhost:8021 streamlit run app.py --server.port 8521
   ```
 
   `API_URL`을 지정하면 프론트엔드가 `BACKEND_PORT` 계산 대신 이 주소를 그대로 사용합니다
